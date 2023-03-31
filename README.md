@@ -12,9 +12,7 @@ Can compare with diesel and gasoline prices
 Keep track of your recharges
 
 # Screenshots
-![Main_01](doc/main_01_dark.png "Main Screen")
-![Main_02](doc/main_02_dark.png "Main screen all")
-![Config](doc/cars_config_light.png "Configuration")
+![Screenshots](doc/screenshots.png "Screenshots")
 
 # Technical features
 Project created using Kotlin as programming language.
