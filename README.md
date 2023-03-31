@@ -7,9 +7,9 @@ When traveling or commuting you usually find charging stations with prices that 
 With this application you can determine if the kWh price is worth it in comparison with diesel or gasoline.
 
 # Features 🥸
-Easy to see if the price is ok
-Can compare with diesel and gasoline prices
-Keep track of your recharges
+* Easy to see if the price is ok
+* Can compare with diesel and gasoline prices
+* Keep track of your recharges
 
 # Screenshots 📸
 ![Screenshots](doc/screenshots.png "Screenshots")
