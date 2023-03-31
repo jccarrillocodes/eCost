@@ -1,4 +1,4 @@
-![Splash](docs/doc_splash.png "Splash")
+![Splash](doc/doc_splash.png "Splash")
 
 eCost for Android
 ==================
