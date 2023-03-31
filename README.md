@@ -11,7 +11,7 @@ Easy to see if the price is ok
 Can compare with diesel and gasoline prices
 Keep track of your recharges
 
-# Screenshots
+# Screenshots 📸
 ![Screenshots](doc/screenshots.png "Screenshots")
 
 # Technical features 🤓
@@ -24,4 +24,4 @@ Keep track of your recharges
 eCost is distributed under the terms of the GNU General Public License. See the license for more information.
 
 # Author 🤷🏻‍♂️
-[Juan Carlos Carrillo Gomez](carrialpine@gmail.com) 
+[Juan Carlos Carrillo Gomez](mailto://carrialpine@gmail.com) 
