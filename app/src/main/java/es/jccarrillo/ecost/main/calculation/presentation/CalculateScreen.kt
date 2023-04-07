@@ -22,7 +22,7 @@ import es.jccarrillo.ecost.core.presentation.theme.GreenComplementary
 import es.jccarrillo.ecost.core.presentation.theme.RedComplementary
 import es.jccarrillo.ecost.core.presentation.util.ifTrue
 import es.jccarrillo.ecost.core.utils.toI18NDouble
-import es.jccarrillo.ecost.main.presentation.PriceTextField
+import es.jccarrillo.ecost.main.presentation.components.ConversionCard
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -122,11 +122,13 @@ fun CalculateContent(
                         verticalArrangement = Arrangement.spacedBy(16.dp),
                         modifier = Modifier.weight(1f)
                     ) {
-                        PriceTextField(
+                        ConversionCard(
+                            carName = state.carName,
                             value = state.value,
                             label = state.valueLabel,
                             changeValue = { setPricePerKWh(it) },
-                            requestFocus = true
+                            requestFocus = inputFocused,
+                            convertedValue = state.costPer100Km
                         )
                     }
 
@@ -146,11 +148,13 @@ fun CalculateContent(
                 }
             }
             else -> {
-                PriceTextField(
+                ConversionCard(
+                    carName = state.carName,
                     value = state.value,
                     label = state.valueLabel,
                     changeValue = { setPricePerKWh(it) },
-                    requestFocus = inputFocused
+                    requestFocus = inputFocused,
+                    convertedValue = state.costPer100Km
                 )
 
                 Cards(
