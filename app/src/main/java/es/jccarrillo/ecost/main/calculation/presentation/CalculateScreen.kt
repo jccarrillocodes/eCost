@@ -238,13 +238,15 @@ private fun OtherCars(
 ) {
 
     Card(
-        elevation = 4.dp
+        elevation = 2.dp,
+        modifier = Modifier
+            .padding(vertical = 10.dp)
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
                 .height(IntrinsicSize.Min)
-                .padding(10.dp)
+                .padding(horizontal = 10.dp)
         ) {
             ResumeCard(
                 caption = "Diesel",
