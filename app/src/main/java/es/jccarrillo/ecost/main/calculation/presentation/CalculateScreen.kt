@@ -30,8 +30,7 @@ import kotlinx.coroutines.launch
 fun CalculateScreen(
     vm: CalculationVM = hiltViewModel(),
     openMyCar: () -> Unit,
-    openRechargeRegistries: () -> Unit,
-    openOtherCars: () -> Unit
+    openRechargeRegistries: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
     val modalSheetState = rememberModalBottomSheetState(
@@ -79,7 +78,6 @@ fun CalculateScreen(
                 setPricePerKWh = vm::setPricePerKWh,
                 openMyCar = openMyCar,
                 openRechargeRegistries = openRechargeRegistries,
-                openOtherCars = openOtherCars,
                 addRechargeClick = {
                     coroutineScope.launch {
                         modalSheetState.show()
@@ -99,7 +97,6 @@ fun CalculateContent(
     setPricePerKWh: (String) -> Unit,
     openMyCar: () -> Unit = {},
     openRechargeRegistries: () -> Unit = {},
-    openOtherCars: () -> Unit = {},
     addRechargeClick: (Double) -> Unit = {}
 ) {
     Column(
@@ -136,10 +133,9 @@ fun CalculateContent(
                         verticalArrangement = Arrangement.spacedBy(16.dp),
                         modifier = Modifier.weight(1f)
                     ) {
-                        Cards(
+                        ComparisonCards(
                             openMyCar = openMyCar,
                             openRechargeRegistries = openRechargeRegistries,
-                            openOtherCars = openOtherCars,
                             state = state,
                             addRechargeClick = addRechargeClick
                         )
@@ -157,11 +153,10 @@ fun CalculateContent(
                     convertedValue = state.costPer100Km
                 )
 
-                Cards(
+                ComparisonCards(
                     state = state,
                     openMyCar = openMyCar,
                     openRechargeRegistries = openRechargeRegistries,
-                    openOtherCars = openOtherCars,
                     addRechargeClick = addRechargeClick
                 )
             }
@@ -173,10 +168,9 @@ fun CalculateContent(
 }
 
 @Composable
-private fun Cards(
+private fun ComparisonCards(
     openMyCar: () -> Unit,
     openRechargeRegistries: () -> Unit,
-    openOtherCars: () -> Unit,
     state: CalculationState,
     addRechargeClick: (Double) -> Unit
 ) {
@@ -190,7 +184,6 @@ private fun Cards(
 
     OtherCars(
         state = state,
-        openOtherCars = openOtherCars
     )
 
 }
@@ -208,11 +201,20 @@ private fun MyCar(
         modifier = Modifier
             .fillMaxWidth(),
     ) {
-        Text(
-            text = state.carName,
-            style = MaterialTheme.typography.h6,
+        OutlinedButton(
+            onClick = { state.value.toI18NDouble()?.let { addRechargeClick(it) } },
             modifier = Modifier.weight(1f)
-        )
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ev_station_24),
+                    contentDescription = "Add recharge"
+                )
+                Text(text = "Add recharge")
+            }
+        }
         IconButton(onClick = openRechargeRegistries) {
             Icon(
                 painter = painterResource(id = R.drawable.bar_chart_24),
@@ -228,76 +230,36 @@ private fun MyCar(
         }
     }
 
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.height(IntrinsicSize.Min)
-    ) {
-        ResumeCard(
-            caption = "Price per 100km",
-            value = state.costPer100Km,
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-        )
-
-        OutlinedButton(
-            onClick = { state.value.toI18NDouble()?.let { addRechargeClick(it) } },
-            modifier = Modifier.fillMaxHeight()
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ev_station_24),
-                    contentDescription = "Add recharge"
-                )
-                Text(text = "Add recharge")
-            }
-        }
-    }
 }
 
 @Composable
 private fun OtherCars(
     state: CalculationState,
-    openOtherCars: () -> Unit
 ) {
 
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .fillMaxWidth(),
-    ) {
-        Text(text = "Other cars", style = MaterialTheme.typography.h6)
-        IconButton(onClick = openOtherCars) {
-            Icon(imageVector = Icons.Default.Settings, contentDescription = "Configure")
+    Card {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier.height(IntrinsicSize.Min)
+        ) {
+            ResumeCard(
+                caption = "Diesel diff per 100km",
+                value = state.costDiffDiesel.per100km,
+                backgroundColor = state.costDiffDiesel.goodness.toBackgroundColor(),
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+            )
 
+            ResumeCard(
+                caption = "Gasoline diff per 100km",
+                value = state.costDiffGasoline.per100km,
+                backgroundColor = state.costDiffGasoline.goodness.toBackgroundColor(),
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+            )
         }
-    }
-
-
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.height(IntrinsicSize.Min)
-    ) {
-        ResumeCard(
-            caption = "Diesel diff per 100km",
-            value = state.costDiffDiesel.per100km,
-            backgroundColor = state.costDiffDiesel.goodness.toBackgroundColor(),
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-        )
-
-        ResumeCard(
-            caption = "Gasoline diff per 100km",
-            value = state.costDiffGasoline.per100km,
-            backgroundColor = state.costDiffGasoline.goodness.toBackgroundColor(),
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-        )
     }
 }
 

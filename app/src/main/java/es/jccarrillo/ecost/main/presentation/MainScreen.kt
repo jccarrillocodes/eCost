@@ -21,9 +21,6 @@ fun MainScreen() {
                 },
                 openRechargeRegistries = {
                     navController.recharges.navigate()
-                },
-                openOtherCars = {
-                    navController.otherCars.navigate()
                 }
             )
         }
@@ -32,6 +29,9 @@ fun MainScreen() {
             MyCarScreen(
                 onBack = {
                     navController.popBackStack()
+                },
+                onOpenOtherCars = {
+                    navController.otherCars.navigate()
                 }
             )
         }

@@ -8,6 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,7 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import es.jccarrillo.ecost.main.presentation.QuantityTextField
 
 @Composable
-fun MyCarScreen(vm: MyCarVM = hiltViewModel(), onBack: () -> Unit) {
+fun MyCarScreen(vm: MyCarVM = hiltViewModel(), onBack: () -> Unit, onOpenOtherCars: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -41,7 +42,8 @@ fun MyCarScreen(vm: MyCarVM = hiltViewModel(), onBack: () -> Unit) {
             state = state.value,
             onUpdateCarName = vm::onUpdateCarName,
             onUpdateCurrencyFormat = vm::onUpdateCurrencyFormat,
-            onUpdateConsumption = vm::onUpdateConsumption
+            onUpdateConsumption = vm::onUpdateConsumption,
+            onOpenOtherCars = onOpenOtherCars
         )
     }
 }
@@ -52,7 +54,8 @@ private fun MyCarContent(
     state: MyCarState,
     onUpdateCarName: (String) -> Unit,
     onUpdateCurrencyFormat: (String, String) -> Unit,
-    onUpdateConsumption: (String) -> Unit
+    onUpdateConsumption: (String) -> Unit,
+    onOpenOtherCars: () -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -86,6 +89,14 @@ private fun MyCarContent(
                 onUpdateConsumption(it)
             }
         )
+
+        OutlinedButton(
+            onClick = onOpenOtherCars,
+            modifier = Modifier.fillMaxHeight()
+        ) {
+            Icon(imageVector = Icons.Default.Settings, contentDescription = "Configure")
+            Text(text = "Other cars")
+        }
     }
 }
 
