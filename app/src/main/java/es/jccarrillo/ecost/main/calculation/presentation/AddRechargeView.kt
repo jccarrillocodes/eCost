@@ -12,7 +12,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import es.jccarrillo.ecost.main.presentation.PriceTextField
 import es.jccarrillo.ecost.main.presentation.QuantityTextField
 
 @Composable
@@ -30,12 +29,21 @@ fun AddRechargeView(
         modifier = Modifier.padding(16.dp)
     ) {
         Text(text = "Add recharge", style = MaterialTheme.typography.h4)
-        PriceTextField(value = value, label = priceFormat, changeValue = {}, readOnly = true)
+        QuantityTextField(
+            value = value,
+            label = priceFormat,
+            changeValue = {},
+            readOnly = true,
+            modifier = Modifier
+                .fillMaxWidth()
+        )
         QuantityTextField(
             value = recharge.value,
             label = "kW 🔋",
             changeValue = { recharge.value = it },
-            requestFocus = focus
+            requestFocus = focus,
+            modifier = Modifier
+                .fillMaxWidth()
         )
         Button(
             onClick = { addRecharge(value, recharge.value) },
