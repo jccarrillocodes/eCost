@@ -14,6 +14,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
@@ -57,6 +58,9 @@ fun QuantityTextField(
     Column(
         modifier = modifier
     ) {
+        val textColor = textStyle.color.takeOrElse {
+            TextFieldDefaults.textFieldColors().textColor(true).value
+        }
         BasicTextField(
             value = textFieldValueState,
             onValueChange = {
@@ -64,7 +68,9 @@ fun QuantityTextField(
                 changeValue(it.text)
             },
             readOnly = readOnly,
-            textStyle = textStyle,
+            textStyle = textStyle.copy(
+                color = textColor
+            ),
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done, keyboardType = KeyboardType.Decimal

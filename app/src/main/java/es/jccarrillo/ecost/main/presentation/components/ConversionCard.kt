@@ -2,10 +2,7 @@ package es.jccarrillo.ecost.main.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.*
@@ -25,6 +22,7 @@ fun ConversionCard(
     requestFocus: Boolean = true,
 ) {
     Card(
+        elevation = 4.dp,
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()

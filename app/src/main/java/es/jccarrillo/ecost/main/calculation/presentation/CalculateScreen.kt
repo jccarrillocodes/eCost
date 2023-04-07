@@ -175,7 +175,7 @@ private fun ComparisonCards(
     addRechargeClick: (Double) -> Unit
 ) {
 
-    MyCar(
+    MyCarActions(
         openMyCar = openMyCar,
         openRechargeRegistries = openRechargeRegistries,
         state = state,
@@ -189,7 +189,7 @@ private fun ComparisonCards(
 }
 
 @Composable
-private fun MyCar(
+private fun MyCarActions(
     openMyCar: () -> Unit,
     openRechargeRegistries: () -> Unit,
     state: CalculationState,
@@ -237,24 +237,28 @@ private fun OtherCars(
     state: CalculationState,
 ) {
 
-    Card {
+    Card(
+        elevation = 4.dp
+    ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.height(IntrinsicSize.Min)
+            modifier = Modifier
+                .height(IntrinsicSize.Min)
+                .padding(10.dp)
         ) {
             ResumeCard(
-                caption = "Diesel diff per 100km",
+                caption = "Diesel",
                 value = state.costDiffDiesel.per100km,
-                backgroundColor = state.costDiffDiesel.goodness.toBackgroundColor(),
+                diffState = state.costDiffDiesel.goodness,
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight()
             )
 
             ResumeCard(
-                caption = "Gasoline diff per 100km",
+                caption = "Gasoline",
                 value = state.costDiffGasoline.per100km,
-                backgroundColor = state.costDiffGasoline.goodness.toBackgroundColor(),
+                diffState = state.costDiffGasoline.goodness,
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight()
@@ -274,31 +278,51 @@ private fun ResumeCard(
     modifier: Modifier = Modifier,
     caption: String,
     value: String,
-    backgroundColor: Color? = null
+    diffState: DiffState
 ) {
-    Card(
-        modifier = modifier,
-        elevation = 4.dp
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center,
+        modifier = modifier
+            .padding(8.dp, 16.dp)
     ) {
-        Column(
-            verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .ifTrue(backgroundColor != null) {
-                    it.background(backgroundColor!!)
-                }
-                .padding(8.dp, 16.dp)
-        ) {
-            Text(
-                text = caption,
-                style = MaterialTheme.typography.h6,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center
-            )
-            Text(
-                text = value, style = MaterialTheme.typography.h4,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center
-            )
+        val (icon, desc) = when (diffState) {
+            DiffState.GOOD -> Icons.Default.KeyboardArrowUp to "Good"
+            DiffState.BAD -> Icons.Default.KeyboardArrowDown to "Bad"
+            DiffState.INDIFFERENT -> Icons.Default.Done to "Not bad"
+        }
+        val tint = diffState.toBackgroundColor() ?: LocalContentColor.current
+        ContentColorComponent(contentColor = tint) {
+            Icon(imageVector = icon, contentDescription = desc)
+
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 10.dp)
+                    .width(IntrinsicSize.Min)
+            ) {
+                Text(
+                    text = caption,
+                    style = MaterialTheme.typography.h6,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = value, style = MaterialTheme.typography.body1,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
+}
+
+@Composable
+fun ContentColorComponent(
+    contentColor: Color = LocalContentColor.current,
+    content: @Composable () -> Unit
+) {
+    CompositionLocalProvider(
+        LocalContentColor provides contentColor,
+        content = content
+    )
 }
