@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import es.jccarrillo.ecost.main.presentation.QuantityTextField
+import es.jccarrillo.ecost.main.presentation.components.QuantityTextField
 
 @Composable
 fun MyCarScreen(vm: MyCarVM = hiltViewModel(), onBack: () -> Unit, onOpenOtherCars: () -> Unit) {

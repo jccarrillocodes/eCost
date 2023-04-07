@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import es.jccarrillo.ecost.core.presentation.theme.RedComplementary
 import es.jccarrillo.ecost.core.presentation.theme.RedDarkComplementary
-import es.jccarrillo.ecost.main.presentation.QuantityTextField
+import es.jccarrillo.ecost.main.presentation.components.QuantityTextField
 import kotlinx.coroutines.launch
 
 @Composable

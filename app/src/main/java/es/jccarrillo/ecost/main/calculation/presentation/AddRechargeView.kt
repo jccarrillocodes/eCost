@@ -12,7 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import es.jccarrillo.ecost.main.presentation.QuantityTextField
+import es.jccarrillo.ecost.main.presentation.components.QuantityTextField
 
 @Composable
 fun AddRechargeView(
