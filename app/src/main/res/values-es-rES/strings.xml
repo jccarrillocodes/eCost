@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">eCost</string>
+    <string name="add_recharge">Añadir recarga</string>
+    <string name="add">Añadir</string>
+    <string name="kw">kW 🔋</string>
+    <string name="diesel">Diesel</string>
+    <string name="gasoline">Gasolina</string>
+    <string name="ecost_calculator">eCost calculator</string>
+    <string name="registries">Registros</string>
+    <string name="configure">Configura</string>
+    <string name="good">Bien</string>
+    <string name="bad">Mal</string>
+    <string name="not_bad">Regular</string>
+    <string name="car_configuration">Configuración de coche</string>
+    <string name="back">Atrás</string>
+    <string name="my_car_name">Nombre de mi coche</string>
+    <string name="consumption_per_100km">Consumo por 100km</string>
+    <string name="other_cars">Otros coches</string>
+    <string name="currency_format">Formato de moneda</string>
+    <string name="see_options">Ver optiones</string>
+    <string name="other_cars_configuration">Configuración otros coches</string>
+    <string name="price_per_liter">Precio por litro</string>
+    <string name="liters_100km">Litros/100km</string>
+    <string name="error_input_value">El valor no es correcto, corrígalo</string>
+    <string name="euro_100km">€/100km</string>
+    <string name="delete">Borrar</string>
+    <string name="empty_data">Sin datos, añade alguno</string>
+    <string name="clear_registry">Limpiar registro</string>
+</resources>
