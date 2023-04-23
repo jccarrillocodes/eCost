@@ -21,9 +21,11 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import es.jccarrillo.ecost.R
 import java.util.*
 import kotlin.math.min
 
@@ -38,7 +40,7 @@ fun RechargesScreen(vm: RechargesVM = hiltViewModel(), onBack: () -> Unit) {
                     IconButton(onClick = { vm.clear() }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Clear registry"
+                            contentDescription = stringResource(R.string.clear_registry)
                         )
                     }
                 }
@@ -47,7 +49,9 @@ fun RechargesScreen(vm: RechargesVM = hiltViewModel(), onBack: () -> Unit) {
                     onBack()
                 }) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack, contentDescription = "Back"
+                        imageVector = Icons.Default.ArrowBack, contentDescription = stringResource(
+                            id = R.string.back
+                        )
                     )
                 }
             })
@@ -67,6 +71,7 @@ fun RechargesContent(paddingValues: PaddingValues, state: RechargesState, onRemo
             paddingValues = paddingValues,
             rechargesState = state, onRemove = onRemove
         )
+
         RechargesState.Loading -> Loading()
         RechargesState.Empty -> Empty()
     }
@@ -88,7 +93,7 @@ internal fun Empty() {
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        Text(text = "No data yet, add some")
+        Text(text = stringResource(R.string.empty_data))
     }
 }
 
@@ -145,7 +150,7 @@ fun RechargeRow(
     Box {
         Icon(
             imageVector = Icons.Default.Delete,
-            contentDescription = "Delete",
+            contentDescription = stringResource(R.string.delete),
             modifier = Modifier
                 .align(Alignment.CenterEnd)
                 .padding(horizontal = 10.dp)

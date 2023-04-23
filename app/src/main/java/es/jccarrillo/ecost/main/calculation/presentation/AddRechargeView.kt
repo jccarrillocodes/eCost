@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import es.jccarrillo.ecost.R
 import es.jccarrillo.ecost.main.presentation.components.QuantityTextField
 
 @Composable
@@ -28,7 +30,7 @@ fun AddRechargeView(
         verticalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier.padding(16.dp)
     ) {
-        Text(text = "Add recharge", style = MaterialTheme.typography.h4)
+        Text(text = stringResource(R.string.add_recharge), style = MaterialTheme.typography.h4)
         QuantityTextField(
             value = value,
             label = priceFormat,
@@ -39,7 +41,7 @@ fun AddRechargeView(
         )
         QuantityTextField(
             value = recharge.value,
-            label = "kW 🔋",
+            label = stringResource(R.string.kw),
             changeValue = { recharge.value = it },
             requestFocus = focus,
             modifier = Modifier
@@ -49,7 +51,7 @@ fun AddRechargeView(
             onClick = { addRecharge(value, recharge.value) },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Add")
+            Text(text = stringResource(R.string.add))
         }
     }
 }

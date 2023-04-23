@@ -9,8 +9,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import es.jccarrillo.ecost.R
 
 @Composable
 fun ConversionCard(
@@ -82,7 +84,7 @@ fun ConversionCard(
                             .height(1.dp)
                     )
                     Text(
-                        text = "€/100km",
+                        text = stringResource(R.string.euro_100km),
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.body1,
                         modifier = Modifier.fillMaxWidth()

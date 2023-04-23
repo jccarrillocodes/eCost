@@ -12,8 +12,10 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import es.jccarrillo.ecost.R
 import es.jccarrillo.ecost.main.presentation.components.QuantityTextField
 
 @Composable
@@ -22,13 +24,13 @@ fun MyCarScreen(vm: MyCarVM = hiltViewModel(), onBack: () -> Unit, onOpenOtherCa
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Car configuration")
+                    Text(text = stringResource(R.string.car_configuration))
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 }
@@ -70,7 +72,7 @@ private fun MyCarContent(
             value = state.name,
             onValueChange = onUpdateCarName,
             label = {
-                Text("My car name", style = MaterialTheme.typography.h5)
+                Text(stringResource(R.string.my_car_name), style = MaterialTheme.typography.h5)
             },
             textStyle = MaterialTheme.typography.h5,
             modifier = Modifier.fillMaxWidth()
@@ -84,7 +86,7 @@ private fun MyCarContent(
 
         QuantityTextField(
             value = state.kwPer100km,
-            label = "Consumption per 100km",
+            label = stringResource(R.string.consumption_per_100km),
             changeValue = {
                 onUpdateConsumption(it)
             }
@@ -94,8 +96,11 @@ private fun MyCarContent(
             onClick = onOpenOtherCars,
             modifier = Modifier.fillMaxHeight()
         ) {
-            Icon(imageVector = Icons.Default.Settings, contentDescription = "Configure")
-            Text(text = "Other cars")
+            Icon(
+                imageVector = Icons.Default.Settings,
+                contentDescription = stringResource(id = R.string.configure)
+            )
+            Text(text = stringResource(R.string.other_cars))
         }
     }
 }
@@ -111,7 +116,7 @@ private fun FormatsDropdown(
     }
 
     Column {
-        Text("Currency format", style = MaterialTheme.typography.h5)
+        Text(stringResource(R.string.currency_format), style = MaterialTheme.typography.h5)
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -123,12 +128,19 @@ private fun FormatsDropdown(
                 style = MaterialTheme.typography.h5,
                 modifier = Modifier.weight(1f)
             )
-            Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = "See options")
+            Icon(
+                imageVector = Icons.Default.ArrowDropDown,
+                contentDescription = stringResource(R.string.see_options)
+            )
         }
         DropdownMenu(
             expanded = dropdownExpanded,
             onDismissRequest = { dropdownExpanded = false }) {
-            FormatOptions.forEach { option ->
+            val formatOptions = listOf(
+                ("%.3f€" to "€/kWh"),
+                ("$%.3f" to "$/kWh")
+            )
+            formatOptions.forEach { option ->
                 DropdownMenuItem(onClick = {
                     dropdownExpanded = false
                     onUpdateCurrencyFormat(option.first, option.second)
@@ -139,8 +151,3 @@ private fun FormatsDropdown(
         }
     }
 }
-
-private val FormatOptions = listOf(
-    ("%.3f€" to "€/kWh"),
-    ("$%.3f" to "$/kWh")
-)

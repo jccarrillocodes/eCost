@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -65,7 +66,7 @@ fun CalculateScreen(
             topBar = {
                 TopAppBar(
                     title = {
-                        Text(text = "eCost calculator")
+                        Text(text = stringResource(R.string.ecost_calculator))
                     }
                 )
             },
@@ -210,22 +211,22 @@ private fun MyCarActions(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ev_station_24),
-                    contentDescription = "Add recharge"
+                    contentDescription = stringResource(id = R.string.add_recharge)
                 )
-                Text(text = "Add recharge")
+                Text(text = stringResource(id = R.string.add_recharge))
             }
         }
         IconButton(onClick = openRechargeRegistries) {
             Icon(
                 painter = painterResource(id = R.drawable.bar_chart_24),
-                contentDescription = "Registries"
+                contentDescription = stringResource(R.string.registries)
             )
 
         }
         IconButton(onClick = openMyCar) {
             Icon(
                 imageVector = Icons.Default.Settings,
-                contentDescription = "Configure"
+                contentDescription = stringResource(R.string.configure)
             )
         }
     }
@@ -249,7 +250,7 @@ private fun OtherCars(
                 .padding(horizontal = 10.dp)
         ) {
             ResumeCard(
-                caption = "Diesel",
+                caption = stringResource(R.string.diesel),
                 value = state.costDiffDiesel.per100km,
                 diffState = state.costDiffDiesel.goodness,
                 modifier = Modifier
@@ -258,7 +259,7 @@ private fun OtherCars(
             )
 
             ResumeCard(
-                caption = "Gasoline",
+                caption = stringResource(R.string.gasoline),
                 value = state.costDiffGasoline.per100km,
                 diffState = state.costDiffGasoline.goodness,
                 modifier = Modifier
@@ -289,9 +290,9 @@ private fun ResumeCard(
             .padding(8.dp, 16.dp)
     ) {
         val (icon, desc) = when (diffState) {
-            DiffState.GOOD -> Icons.Default.KeyboardArrowUp to "Good"
-            DiffState.BAD -> Icons.Default.KeyboardArrowDown to "Bad"
-            DiffState.INDIFFERENT -> Icons.Default.Done to "Not bad"
+            DiffState.GOOD -> Icons.Default.KeyboardArrowUp to stringResource(R.string.good)
+            DiffState.BAD -> Icons.Default.KeyboardArrowDown to stringResource(R.string.bad)
+            DiffState.INDIFFERENT -> Icons.Default.Done to stringResource(R.string.not_bad)
         }
         val tint = diffState.toBackgroundColor() ?: LocalContentColor.current
         ContentColorComponent(contentColor = tint) {

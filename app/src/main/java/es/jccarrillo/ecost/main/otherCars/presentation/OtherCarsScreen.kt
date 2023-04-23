@@ -10,8 +10,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import es.jccarrillo.ecost.R
 import es.jccarrillo.ecost.core.presentation.theme.RedComplementary
 import es.jccarrillo.ecost.core.presentation.theme.RedDarkComplementary
 import es.jccarrillo.ecost.main.presentation.components.QuantityTextField
@@ -24,7 +26,7 @@ fun OtherCarsScreen(
     val coroutineScope = rememberCoroutineScope()
     Scaffold(topBar = {
         TopAppBar(title = {
-            Text(text = "Other cars configuration")
+            Text(text = stringResource(R.string.other_cars_configuration))
         }, navigationIcon = {
             IconButton(onClick = {
                 coroutineScope.launch {
@@ -33,7 +35,7 @@ fun OtherCarsScreen(
                 }
             }) {
                 Icon(
-                    imageVector = Icons.Default.ArrowBack, contentDescription = "Back"
+                    imageVector = Icons.Default.ArrowBack, contentDescription = stringResource(id = R.string.back)
                 )
             }
         })
@@ -68,7 +70,7 @@ private fun OtherCarsContent(
             )
     ) {
         CarFields(
-            name = "Diesel",
+            name = stringResource(id = R.string.diesel),
             pricePerLiter = state.dieselPrice.value,
             pricePerLiterError = state.dieselPrice.state.isError(),
             litersPer100km = state.dieselQuantity.value,
@@ -78,7 +80,7 @@ private fun OtherCarsContent(
         )
 
         CarFields(
-            name = "Gasoline/Petrol",
+            name = stringResource(id = R.string.gasoline),
             pricePerLiter = state.gasolinePrice.value,
             pricePerLiterError = state.gasolinePrice.state.isError(),
             litersPer100km = state.gasolineQuantity.value,
@@ -102,7 +104,7 @@ private fun CarFields(
     Text(text = name, style = MaterialTheme.typography.h5)
     Column {
         QuantityTextField(
-            value = pricePerLiter, label = "Price per liter", changeValue = onPricePerLiterChange
+            value = pricePerLiter, label = stringResource(R.string.price_per_liter), changeValue = onPricePerLiterChange
         )
 
         if (pricePerLiterError) {
@@ -111,7 +113,7 @@ private fun CarFields(
     }
     Column {
         QuantityTextField(
-            value = litersPer100km, label = "Liters/100km", changeValue = onLitersPer100kmChange
+            value = litersPer100km, label = stringResource(R.string.liters_100km), changeValue = onLitersPer100kmChange
         )
 
         if (literPer100kmError) {
@@ -123,7 +125,7 @@ private fun CarFields(
 @Composable
 private fun Error() {
     Text(
-        text = "This value is not correct, please, fix it",
+        text = stringResource(R.string.error_input_value),
         style = MaterialTheme.typography.body2.copy(color = RedDarkComplementary),
         modifier = Modifier
             .fillMaxWidth()

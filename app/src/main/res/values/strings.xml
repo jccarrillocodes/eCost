@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">eCost</string>
+    <string name="add_recharge">Add recharge</string>
+    <string name="add">Add</string>
+    <string name="kw">kW 🔋</string>
+    <string name="diesel">Diesel</string>
+    <string name="gasoline">Gasoline</string>
+    <string name="ecost_calculator">eCost calculator</string>
+    <string name="registries">Registries</string>
+    <string name="configure">Configure</string>
+    <string name="good">Good</string>
+    <string name="bad">Bad</string>
+    <string name="not_bad">Not bad</string>
+    <string name="car_configuration">Car configuration</string>
+    <string name="back">Back</string>
+    <string name="my_car_name">My car name</string>
+    <string name="consumption_per_100km">Consumption per 100km</string>
+    <string name="other_cars">Other cars</string>
+    <string name="currency_format">Currency format</string>
+    <string name="see_options">See options</string>
+    <string name="other_cars_configuration">Other cars configuration</string>
+    <string name="price_per_liter">Price per liter</string>
+    <string name="liters_100km">Liters/100km</string>
+    <string name="error_input_value">This value is not correct, please, fix it</string>
+    <string name="euro_100km">€/100km</string>
+    <string name="delete">Delete</string>
+    <string name="empty_data">No data yet, add some</string>
+    <string name="clear_registry">Clear registry</string>
 </resources>
