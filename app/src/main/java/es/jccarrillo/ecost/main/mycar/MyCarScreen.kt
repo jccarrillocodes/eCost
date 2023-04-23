@@ -1,16 +1,26 @@
 package es.jccarrillo.ecost.main.mycar
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -101,53 +111,6 @@ private fun MyCarContent(
                 contentDescription = stringResource(id = R.string.configure)
             )
             Text(text = stringResource(R.string.other_cars))
-        }
-    }
-}
-
-@Composable
-private fun FormatsDropdown(
-    formatPrice: String,
-    consumptionLabel: String,
-    onUpdateCurrencyFormat: (String, String) -> Unit
-) {
-    var dropdownExpanded by remember {
-        mutableStateOf(false)
-    }
-
-    Column {
-        Text(stringResource(R.string.currency_format), style = MaterialTheme.typography.h5)
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { dropdownExpanded = !dropdownExpanded }
-                .padding(8.dp, 4.dp)) {
-            Text(
-                text = "$formatPrice - $consumptionLabel",
-                style = MaterialTheme.typography.h5,
-                modifier = Modifier.weight(1f)
-            )
-            Icon(
-                imageVector = Icons.Default.ArrowDropDown,
-                contentDescription = stringResource(R.string.see_options)
-            )
-        }
-        DropdownMenu(
-            expanded = dropdownExpanded,
-            onDismissRequest = { dropdownExpanded = false }) {
-            val formatOptions = listOf(
-                ("%.3f€" to "€/kWh"),
-                ("$%.3f" to "$/kWh")
-            )
-            formatOptions.forEach { option ->
-                DropdownMenuItem(onClick = {
-                    dropdownExpanded = false
-                    onUpdateCurrencyFormat(option.first, option.second)
-                }) {
-                    Text(text = "${option.first} - ${option.second}")
-                }
-            }
         }
     }
 }
